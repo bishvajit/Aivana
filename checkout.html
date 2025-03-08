@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My-Shop · Checkout</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="header-logo">My-Shop</a>
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <a class="cart" href="cart.html" aria-label="Shopping cart">
+        <span role="img" aria-label="cart">🛒</span>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <section class="checkout-section">
+    <h2>Checkout</h2>
+    <div class="checkout-grid">
+      <form id="checkout-form" class="card">
+        <h3>Shipping Address</h3>
+        <div class="form-row">
+          <label>Full Name<input required id="name" type="text" placeholder="John Doe"></label>
+          <label>Phone<input required id="phone" type="tel" placeholder="+91 98765 43210"></label>
+        </div>
+        <label>Address Line 1<input required id="addr1" type="text" placeholder="Street, Area"></label>
+        <label>Address Line 2<input id="addr2" type="text" placeholder="Apartment, Suite (optional)"></label>
+        <div class="form-row">
+          <label>City<input required id="city" type="text" placeholder="Noida"></label>
+          <label>Postal Code<input required id="zip" type="text" placeholder="201301"></label>
+        </div>
+
+        <h3>Payment</h3>
+        <label>
+          <select id="payment-method" required>
+            <option value="cod" selected>Cash on Delivery (COD)</option>
+            <option value="card">Card (Demo)</option>
+          </select>
+        </label>
+
+        <button class="btn-primary" type="submit">Place Order</button>
+        <p id="order-feedback" class="feedback"></p>
+      </form>
+
+      <aside class="card order-summary">
+        <h3>Order Summary</h3>
+        <div id="order-items"></div>
+        <div class="summary-line">Subtotal: $<span id="sum-subtotal">0.00</span></div>
+        <div class="summary-line">Shipping: <span>FREE</span></div>
+        <div class="summary-line total">Total: $<span id="sum-total">0.00</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <script src="app.js" defer></script>
+  <script src="checkout.js" defer></script>
+</body>
+</html>
