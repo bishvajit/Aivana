@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Frontend</title>
-    <link rel="stylesheet" href="styles/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Hero Section</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Welcome to Our Online Store</h1>
-    </header>
-    <script src="scripts/app.js"></script>
+
+  <!-- Header Section -->
+  <header>
+    <a href="#" class="header-logo">MyShop</a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-right">
+      <div class="search-bar">
+        <input type="text" placeholder="Search products...">
+      </div>
+      <div class="cart">
+        🛒
+        <span class="cart-badge">3</span>
+      </div>
+      <div class="hamburger">☰</div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Biggest Sale of the Year!</h1>
+      <p>Get up to 50% off on all products. Limited time only.</p>
+      <a href="#products" class="hero-btn">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script src="script.js" defer></script>
 </body>
 </html>
