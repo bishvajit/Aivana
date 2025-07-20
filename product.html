@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="header-logo">MyShop</a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <div class="cart">
+        🛒
+        <span class="cart-badge">0</span>
+      </div>
+      <div class="hamburger">☰</div>
+    </div>
+  </header>
+
+  <!-- Product Details -->
+  <section class="product-detail">
+    <div id="loading" class="loading">Loading product...</div>
+    <div id="error" class="error-message"></div>
+    <div class="product-container" id="product-container"></div>
+  </section>
+
+  <script src="product.js" defer></script>
+</body>
+</html>
