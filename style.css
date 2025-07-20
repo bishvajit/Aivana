@@ -288,4 +288,65 @@ header {
     text-align: center;
   }
 }
+/* Existing styles remain */
+
+/* Zoom Container */
+.image-zoom-container {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.zoom-lens {
+  display: none;
+  position: absolute;
+  border: 1px solid #aaa;
+  background: rgba(255,255,255,0.2);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Variation Dropdowns */
+.variation {
+  margin: 1rem 0;
+}
+
+.variation label {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+/* Quantity Selector */
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.quantity button {
+  padding: 0.5rem 1rem;
+  background: #222;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.quantity button:hover {
+  background: #444;
+}
+
+/* Cart Feedback */
+.feedback {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: green;
+  margin-top: 0.5rem;
+}
+
+.feedback.show {
+  opacity: 1;
+}
+
 
