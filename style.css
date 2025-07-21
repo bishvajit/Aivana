@@ -348,5 +348,16 @@ header {
 .feedback.show {
   opacity: 1;
 }
+.feedback {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: green;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.feedback.show {
+  opacity: 1;
+}
 
 

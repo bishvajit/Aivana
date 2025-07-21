@@ -5,9 +5,10 @@ const loading = document.getElementById('loading');
 const errorMsg = document.getElementById('error');
 const cartBadge = document.querySelector('.cart-badge');
 
-let cartCount = JSON.parse(localStorage.getItem('cartCount')) || 0;
-cartBadge.textContent = cartCount;
+// Load existing cart count
+updateCartBadge();
 
+// Fetch and display product
 async function fetchProductDetails() {
   loading.style.display = 'block';
   try {
@@ -37,7 +38,7 @@ function renderProductDetail(product) {
         <div class="zoom-lens" id="zoom-lens"></div>
       </div>
       <div class="detail-info">
-        <h2>${product.title}</h2>
+        <h2 id="product-name">${product.title}</h2>
         <p class="price" id="product-price" data-base="${product.price}">
           $${product.price.toFixed(2)}
         </p>
@@ -75,17 +76,19 @@ function renderProductDetail(product) {
     </div>
   `;
 
-  setupInteractions(product.price);
+  setupInteractions(product);
   enableImageZoom();
 }
 
-function setupInteractions(basePrice) {
+function setupInteractions(product) {
   const priceElem = document.getElementById('product-price');
   const quantityElem = document.getElementById('quantity');
   const feedbackElem = document.getElementById('cart-feedback');
 
   let quantity = 1;
+  const basePrice = parseFloat(priceElem.dataset.base);
 
+  // Update total price
   function updatePrice() {
     const total = basePrice * quantity;
     priceElem.textContent = `$${total.toFixed(2)}`;
@@ -108,28 +111,48 @@ function setupInteractions(basePrice) {
   });
 
   document.getElementById('add-to-cart').addEventListener('click', () => {
-    cartCount += quantity;
-    localStorage.setItem('cartCount', cartCount);
-    cartBadge.textContent = cartCount;
-
-    // Save product selection to cart storage
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     const size = document.getElementById('size').value;
     const color = document.getElementById('color').value;
 
-    cartItems.push({
-      productId,
-      quantity,
+    addToCart({
+      id: product.id,
+      name: product.title,
+      image: product.image,
       size,
       color,
-      price: basePrice * quantity
+      price: basePrice,
+      quantity
     });
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-    feedbackElem.textContent = 'Added to cart!';
+    feedbackElem.textContent = 'Item added to cart!';
     feedbackElem.classList.add('show');
     setTimeout(() => feedbackElem.classList.remove('show'), 1500);
   });
+}
+
+// Add item to localStorage cart
+function addToCart(item) {
+  const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+  // Check if this product (with same variation) already exists
+  const existingItem = cart.find(cartItem =>
+    cartItem.id === item.id && cartItem.size === item.size && cartItem.color === item.color
+  );
+
+  if (existingItem) {
+    existingItem.quantity += item.quantity; // update quantity
+  } else {
+    cart.push(item);
+  }
+
+  localStorage.setItem('cartItems', JSON.stringify(cart));
+  updateCartBadge();
+}
+
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartBadge.textContent = totalCount;
 }
 
 function enableImageZoom() {
@@ -158,4 +181,3 @@ function enableImageZoom() {
 }
 
 fetchProductDetails();
-

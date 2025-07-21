@@ -66,3 +66,14 @@ function renderProducts(products) {
 }
 
 fetchProducts();
+
+const cartBadge = document.querySelector('.cart-badge');
+
+// Show existing cart count on load
+updateCartBadge();
+
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartBadge.textContent = totalCount;
+}
