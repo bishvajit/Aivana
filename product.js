@@ -5,10 +5,9 @@ const loading = document.getElementById('loading');
 const errorMsg = document.getElementById('error');
 const cartBadge = document.querySelector('.cart-badge');
 
-// Load existing cart count
-updateCartBadge();
+let cartCount = JSON.parse(localStorage.getItem('cartCount')) || 0;
+cartBadge.textContent = cartCount;
 
-// Fetch and display product
 async function fetchProductDetails() {
   loading.style.display = 'block';
   try {
@@ -38,7 +37,7 @@ function renderProductDetail(product) {
         <div class="zoom-lens" id="zoom-lens"></div>
       </div>
       <div class="detail-info">
-        <h2 id="product-name">${product.title}</h2>
+        <h2>${product.title}</h2>
         <p class="price" id="product-price" data-base="${product.price}">
           $${product.price.toFixed(2)}
         </p>
@@ -76,19 +75,17 @@ function renderProductDetail(product) {
     </div>
   `;
 
-  setupInteractions(product);
+  setupInteractions(product.price);
   enableImageZoom();
 }
 
-function setupInteractions(product) {
+function setupInteractions(basePrice) {
   const priceElem = document.getElementById('product-price');
   const quantityElem = document.getElementById('quantity');
   const feedbackElem = document.getElementById('cart-feedback');
 
   let quantity = 1;
-  const basePrice = parseFloat(priceElem.dataset.base);
 
-  // Update total price
   function updatePrice() {
     const total = basePrice * quantity;
     priceElem.textContent = `$${total.toFixed(2)}`;
@@ -111,20 +108,25 @@ function setupInteractions(product) {
   });
 
   document.getElementById('add-to-cart').addEventListener('click', () => {
+    cartCount += quantity;
+    localStorage.setItem('cartCount', cartCount);
+    cartBadge.textContent = cartCount;
+
+    // Save product selection to cart storage
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     const size = document.getElementById('size').value;
     const color = document.getElementById('color').value;
 
-    addToCart({
-      id: product.id,
-      name: product.title,
-      image: product.image,
+    cartItems.push({
+      productId,
+      quantity,
       size,
       color,
-      price: basePrice,
-      quantity
+      price: basePrice * quantity
     });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-    feedbackElem.textContent = 'Item added to cart!';
+    feedbackElem.textContent = 'Added to cart!';
     feedbackElem.classList.add('show');
     setTimeout(() => feedbackElem.classList.remove('show'), 1500);
   });
@@ -181,3 +183,4 @@ function enableImageZoom() {
 }
 
 fetchProductDetails();
+
