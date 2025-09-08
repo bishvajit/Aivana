@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Cart</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My-Shop · Cart</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <a href="index.html" class="header-logo">MyShop</a>
+  <header class="site-header">
+    <a href="index.html" class="header-logo">My-Shop</a>
     <nav>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html#products">Products</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
       </ul>
     </nav>
     <div class="header-right">
-      <div class="cart" aria-label="Shopping cart">
+      <a class="cart" href="cart.html" aria-label="Shopping cart">
         <span role="img" aria-label="cart">🛒</span>
-        <span class="cart-badge">0</span>
-      </div>
-      <button class="hamburger" aria-label="Open menu">☰</button>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
     </div>
   </header>
 
-  <!-- Cart Section -->
   <section class="cart-section">
     <h2>Your Shopping Cart</h2>
     <div id="cart-items" class="cart-items"></div>
     <div id="cart-empty" class="cart-empty">Your cart is empty.</div>
     <div class="cart-summary" id="cart-summary">
-      <h3>Total: $<span id="cart-total">0.00</span></h3>
-      <button id="checkout-btn">Checkout</button>
+      <h3>Subtotal: $<span id="cart-subtotal">0.00</span></h3>
+      <div class="summary-line">Shipping: <span id="cart-shipping">FREE</span></div>
+      <div class="summary-line total">Total: $<span id="cart-total">0.00</span></div>
+      <a id="checkout-btn" class="btn-primary" href="checkout.html">Proceed to Checkout</a>
     </div>
   </section>
 
+  <script src="app.js" defer></script>
   <script src="cart.js" defer></script>
 </body>
 </html>
