@@ -2,37 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Responsive Shop</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My-Shop · Home</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
-  <!-- Header Section -->
-  <header>
+  <header class="site-header">
     <a href="index.html" class="header-logo">My-Shop</a>
     <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="#products">Products</a></li>
-        <li><a href="#About">About</a></li>
-        <li><a href="#Contact">Contact</a></li>
-        <li><a href="#Cart">Cart</a></li>
+        <li><a href="#" aria-disabled="true">About</a></li>
+        <li><a href="#" aria-disabled="true">Contact</a></li>
+        <li><a href="cart.html">Cart</a></li>
       </ul>
     </nav>
     <div class="header-right">
       <div class="search-bar">
-        <input type="text" placeholder="Search products...">
+        <input id="search-input" type="text" placeholder="Search products...">
       </div>
-      <div class="cart">
-        🛒
-        <span class="cart-badge">0</span>
-      </div>
-      <div class="hamburger">☰</div>
+      <a class="cart" href="cart.html" aria-label="Shopping cart">
+        <span role="img" aria-label="cart">🛒</span>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
     </div>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
       <h1>Biggest Sale of the Year!</h1>
@@ -41,18 +38,31 @@
     </div>
   </section>
 
-  <!-- Product Section -->
+  <section class="filters">
+    <div class="filter-row">
+      <label>
+        Category:
+        <select id="category-filter">
+          <option value="all">All</option>
+        </select>
+      </label>
+      <label>
+        Price:
+        <input type="range" id="price-range" min="0" max="1000" step="10" value="1000">
+        <span id="price-value">$1000</span>
+      </label>
+      <button id="clear-filters" class="btn-secondary">Clear</button>
+    </div>
+  </section>
+
   <section id="products" class="product-section">
     <h2>Our Products</h2>
-    <!-- Loading State -->
     <div id="loading" class="loading">Loading products...</div>
-    <!-- Error State -->
     <div id="error" class="error-message"></div>
-    <!-- Product Grid -->
     <div class="product-grid" id="product-grid"></div>
   </section>
 
-  <!-- JavaScript -->
+  <script src="app.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>
